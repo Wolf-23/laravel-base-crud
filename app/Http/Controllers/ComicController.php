@@ -66,6 +66,8 @@ class ComicController extends Controller
 
         if ($comic) {
             return view('comic.show', compact('comic'));
+        } else {
+            abort(404);
         }
     }
 
