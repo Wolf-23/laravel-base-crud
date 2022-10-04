@@ -28,12 +28,12 @@
                         <td>{{$comic->sale_date}}</td>
                         <td>{{$comic->type}}</td>
                         <td>
-                            <a class="btn btn-success" href="{{route('comics.show', ['comic' => $comic->id])}}">Vedi</a>
-                            <a class="btn btn-warning" href="{{route('comics.edit', ['comic' => $comic->id])}}">Modifica</a>
-                            <form class="d-inline-block" action="{{route('comics.destroy', ['comic' => $comic])}}" method="POST">
+                            <a class="btn btn-success my-1" href="{{route('comics.show', ['comic' => $comic->id])}}">Vedi</a>
+                            <a class="btn btn-warning my-1" href="{{route('comics.edit', ['comic' => $comic->id])}}">Modifica</a>
+                            <form class="d-inline-block  my-1" action="{{route('comics.destroy', ['comic' => $comic])}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Elimina</button>
+                                <button type="submit" class="btn btn-danger" onclick="return confirmDelete()">Elimina</button>
                             </form>
                         </td>
                     </tr>
@@ -41,4 +41,8 @@
             </tbody>
         </table>
     </div>
+ @endsection
+
+@section('js')
+    <script src="js/app.js"></script>
 @endsection

@@ -19380,6 +19380,18 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+window.confirmDelete = function () {
+  var result = confirm("Vuoi confermare l'eliminazione?");
+
+  if (result) {
+    console.log('true');
+    return true;
+  } else {
+    console.log('false');
+    return false;
+  }
+};
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

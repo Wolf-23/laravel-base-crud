@@ -109,7 +109,7 @@ class ComicController extends Controller
     {
         if($comic) {
             $comic->delete();
-            return redirect()->route('comics.index');
+            return redirect()->route('comics.index')->with('deleted', 'Il fumetto è stato eliminato!');
         } else {
             abort(404);
         }
