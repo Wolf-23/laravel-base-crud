@@ -14,7 +14,7 @@
         <div class="mb-3"><span class="d-inline-block text-uppercase fs-5 fw-bold">Series:</span> {{$comic->series}}</div>
         <div class="mb-3"><span class="d-inline-block text-uppercase fs-5 fw-bold">Sale Date:</span> {{$comic->sale_date}}</div>
         <div class="mb-3"><span class="d-inline-block text-uppercase fs-5 fw-bold">Type:</span> {{$comic->type}}</div>
-        <a class="btn btn-danger mt-4 d-inline-block" href="{{route('comics.index')}}">Torna alla lista di tutti i fumetti</a>
+        <a class="btn btn-primary mt-4 d-inline-block" href="{{route('comics.index')}}">Torna alla lista di tutti i fumetti</a>
     </div>
 
 @endsection

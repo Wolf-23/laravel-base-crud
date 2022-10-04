@@ -11,6 +11,13 @@
     <body>
         @include('partials.header')
         <main>
+            <div class="container mt-3 text-center">
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+            </div>
             @yield('main')
         </main>
     </body>

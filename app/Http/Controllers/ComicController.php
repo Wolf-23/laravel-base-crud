@@ -62,13 +62,9 @@ class ComicController extends Controller
      */
     public function show($id)
     {
-       $comic = Comic::find($id);
-
-        if ($comic) {
-            return view('comic.show', compact('comic'));
-        } else {
-            abort(404);
-        }
+        $comic = Comic::findOrFail($id);
+        return view('comic.show', compact('comic'));
+        
     }
 
     /**
@@ -77,9 +73,13 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Comic $comic)
     {
-        //
+        if($comic) {
+            return view('comic.edit', compact('comic'));
+        } else {
+            abort(404);
+        }
     }
 
     /**
@@ -89,9 +89,14 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Comic $comic)
     {
-        //
+        if($comic) {
+            $data = $request->all();
+            $comic->update($data);
+            $comic->save();
+            return redirect()->route('comics.edit', ['comic' => $comic])->with('status', 'Il fumetto è stato modificato con successo!');
+        }
     }
 
     /**
@@ -100,8 +105,13 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Comic $comic)
     {
-        //
+        if($comic) {
+            $comic->delete();
+            return redirect()->route('comics.index');
+        } else {
+            abort(404);
+        }
     }
 }
