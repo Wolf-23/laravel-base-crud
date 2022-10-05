@@ -36,19 +36,29 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'title' => 'required|max:255|min:5',
+                'description' => 'required|max:65535',
+                'thumb' => 'required|max:255|url',
+                'price' => 'required|max:20|',
+                'series' => 'required|max:100|min:3',
+                'sale_date' => 'required|max:15|min:5',
+                'type' => 'required|max:50|'
+            ],
+            [
+                'title.required' => 'Il campo :attribute deve essere necessariamente compilato!',
+                'description.required' => 'Il campo :attribute deve essere necessariamente compilato!',
+                'thumb.required' => 'Il campo :attribute deve essere necessariamente compilato!',
+                'thumb.url' => 'Il campo :attribute deve contenere un URL valido!',
+                'price.required' => 'Il campo :attribute deve essere necessariamente compilato!',
+                'series.required' => 'Il campo :attribute deve essere necessariamente compilato!',
+                'sale_date.required' => 'Il campo :attribute deve essere necessariamente compilato!',
+                'type.required' => 'Il campo :attribute deve essere necessariamente compilato!',
+            ]
+        );
         $data = $request->all();
         $newComic = new Comic;
-
-        // $newComic->title = $data['title'];
-        // $newComic->description = $data['description'];
-        // $newComic->thumb = $data['thumb'];
-        // $newComic->price = $data['price'];
-        // $newComic->series = $data['series'];
-        // $newComic->sale_date = $data['sale_date'];
-        // $newComic->type = $data['type'];
-
-        // Uso protected $fillable nel model (?)
-
         $newComic->fill($data);
         $newComic->save();
         return redirect()->route('comics.index');
@@ -91,12 +101,31 @@ class ComicController extends Controller
      */
     public function update(Request $request, Comic $comic)
     {
-        if($comic) {
-            $data = $request->all();
-            $comic->update($data);
-            $comic->save();
-            return redirect()->route('comics.edit', ['comic' => $comic])->with('status', 'Il fumetto è stato modificato con successo!');
-        }
+        $request->validate(
+            [
+                'title' => 'required|max:255|min:5',
+                'description' => 'required|max:65535',
+                'thumb' => 'required|max:255|url',
+                'price' => 'required|max:20|',
+                'series' => 'required|max:100|min:3',
+                'sale_date' => 'required|max:15|min:5',
+                'type' => 'required|max:50|'
+            ],
+            [
+                'title.required' => 'Il campo :attribute deve essere necessariamente compilato!',
+                'description.required' => 'Il campo :attribute deve essere necessariamente compilato!',
+                'thumb.required' => 'Il campo :attribute deve essere necessariamente compilato!',
+                'thumb.url' => 'Il campo :attribute deve contenere un URL valido!',
+                'price.required' => 'Il campo :attribute deve essere necessariamente compilato!',
+                'series.required' => 'Il campo :attribute deve essere necessariamente compilato!',
+                'sale_date.required' => 'Il campo :attribute deve essere necessariamente compilato!',
+                'type.required' => 'Il campo :attribute deve essere necessariamente compilato!',
+            ]
+        );
+        $data = $request->all();
+        $comic->update($data);
+        $comic->save();
+        return redirect()->route('comics.edit', ['comic' => $comic])->with('status', 'Il fumetto è stato modificato con successo!');
     }
 
     /**
